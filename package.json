@@ -1,0 +1,24 @@
+{
+  "name": "repositoryof316copy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "connectDB.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lenzlaww/RepositoryOf316Copy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lenzlaww/RepositoryOf316Copy/issues"
+  },
+  "homepage": "https://github.com/lenzlaww/RepositoryOf316Copy#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "mongodb": "^6.2.0"
+  }
+}
