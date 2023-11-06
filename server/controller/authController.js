@@ -37,6 +37,7 @@ loginUser = async (req, res) => {
         // LOGIN THE USER
         const token = auth.signToken(existingUser._id);
         console.log(token);
+        console.log(existingUser.username);
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -45,8 +46,7 @@ loginUser = async (req, res) => {
         }).status(200).json({
             success: true,
             user: {
-                firstName: existingUser.firstName,
-                lastName: existingUser.lastName,  
+                username: existingUser.username,  
                 email: existingUser.email              
             }
         })
