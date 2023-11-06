@@ -1,5 +1,5 @@
 const auth = require('../auth')
-const User = require('../models/user-model')
+const User = require('../models/user_model')
 const bcrypt = require('bcryptjs')
 
 loginUser = async (req, res) => {
@@ -60,9 +60,9 @@ loginUser = async (req, res) => {
 registerUser = async (req, res) => {
     console.log("REGISTERING USER IN BACKEND");
     try {
-        const { username, email, password, passwordVerify } = req.body;
-        console.log("create user: " + username + " " + email + " " + password + " " + passwordVerify);
-        if (!username || !email || !password || !passwordVerify) {
+        const { username, email, password } = req.body;
+        console.log("create user: " + username + " " + email + " " + password);
+        if (!username || !email || !password) {
             return res
                 .status(400)
                 .json({ errorMessage: "Please enter all required fields." });
@@ -103,6 +103,23 @@ registerUser = async (req, res) => {
         const newUser = new User({username, email, passwordHash});
         const savedUser = await newUser.save();
         console.log("new user saved: " + savedUser._id);
+
+        const token = auth.signToken(savedUser._id);
+        console.log("token:" + token);
+
+        await res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        }).status(200).json({
+            success: true,
+            user: {
+                username: savedUser.username,
+                email: savedUser.email              
+            }
+        })
+
+        console.log("token sent");
 
     } catch (err) {
         console.error(err);
